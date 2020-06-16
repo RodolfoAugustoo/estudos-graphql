@@ -8,6 +8,23 @@ const { ApolloServer, gql } = require('apollo-server')
  * Definições de tipos são escritas no typeDefs
  * Esquema da API
  */
+
+const Usuarios = [{
+    id: 1,
+    nome: "rodolfo",
+    email: 'r.@dolfo.vom'
+},
+{
+    id: 2,
+    nome: 'josé',
+    email: 'jo@se.com'
+},
+{
+    id: 3,
+    nome: 'michele',
+    email: 'mi@chele.com'
+}]
+
 const typeDefs = gql`
     #Pontos de entrada dentro da API
     #Qualquer consulta dentro do tipo query(nome reservado), é um ponto de entrada
@@ -20,6 +37,9 @@ const typeDefs = gql`
         testeDate: Date
         usuarioLogado: Usuario
         produtoEmDestaque: Produto
+        megaSena: [Int]!
+        usuarios: [Usuario]
+        usuario(id: ID): Usuario
     }
 
     #Criando tipos
@@ -27,7 +47,7 @@ const typeDefs = gql`
     scalar Date
 
     type Usuario{
-        id: ID!
+        id: ID
         nome: String!
         email: String!
         idade: Int
@@ -82,9 +102,20 @@ const resolvers = {
                 preco: 2500.99,
                 desconto: 0.2
             }
+        },
+        megaSena() {
+            const crescente = (a, b) => a - b
+            return Array(8).fill(0)
+                .map(n => parseInt(Math.random() * 60 + 1))
+                .sort(crescente)
+        },
+        usuarios() {
+            return Usuarios
+        },
+        usuario(_, { id }) {
+            const selecionado = Usuarios.filter(u => u.id == id)
+            return selecionado ? selecionado[0] : null
         }
-
-
     },
     Usuario: {
         /**
@@ -98,10 +129,10 @@ const resolvers = {
     Produto: {
         produtoComDesconto(produto) {
             if (produto.desconto) {
-                return (produto.preco * (1 - produto.desconto)).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+                return (produto.preco * (1 - produto.desconto)).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
-            else{
-                return produto.preco.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+            else {
+                return produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
         }
     }
