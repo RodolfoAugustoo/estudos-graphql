@@ -19,6 +19,7 @@ const typeDefs = gql`
         dataAtual: String
         testeDate: Date
         usuarioLogado: Usuario
+        produtoEmDestaque: Produto
     }
 
     #Criando tipos
@@ -32,6 +33,13 @@ const typeDefs = gql`
         idade: Int
         salario: Float
         vip: Boolean
+    }
+
+    type Produto {
+        nome: String!
+        preco: Float!
+        desconto: Float
+        produtoComDesconto: String
     }
  `;
 
@@ -67,7 +75,16 @@ const resolvers = {
                 salario_real: 2222.23,
                 vip: true
             }
+        },
+        produtoEmDestaque() {
+            return {
+                nome: 'IPhone',
+                preco: 2500.99,
+                desconto: 0.2
+            }
         }
+
+
     },
     Usuario: {
         /**
@@ -76,6 +93,16 @@ const resolvers = {
          */
         salario(usuario) {
             return usuario.salario_real
+        }
+    },
+    Produto: {
+        produtoComDesconto(produto) {
+            if (produto.desconto) {
+                return (produto.preco * (1 - produto.desconto)).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+            }
+            else{
+                return produto.preco.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+            }
         }
     }
 }
