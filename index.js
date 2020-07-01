@@ -15,7 +15,6 @@ const resolvers = require('./resolvers/Index')
  * Esquema de fgunções que vao resolver os dados de fgormas dfiferentes
  */
 
-
 const server = new ApolloServer({
   typeDefs: importSchema('./schema/index.graphql'),
   resolvers
