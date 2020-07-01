@@ -1,0 +1,17 @@
+#Pontos de entrada dentro da API
+#Qualquer consulta dentro do tipo query(nome reservado), é um ponto de entrada
+#Independente da quantidade de queries continua sendo uma url para todas
+
+type Query {
+    ola: String
+    horaCerta: String
+    dataAtual: String
+    testeDate: Date
+    usuarioLogado: Usuario
+    produtoEmDestaque: Produto
+    megaSena: [Int]!
+    usuarios: [Usuario]
+    usuario(id: ID): Usuario
+    perfil(id: ID): Perfil
+    perfis: [Perfil]!
+}

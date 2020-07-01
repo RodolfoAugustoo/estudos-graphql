@@ -1,0 +1,10 @@
+#Para usar 'import' dentro do graphql é necessário uma dependência
+# npm i -s graphql-import
+
+#import Usuario, Perfil from 'User.graphql'
+#import Query from 'Query.graphql'
+#import Produto from 'Product.graphql'
+
+scalar Date
+
+
