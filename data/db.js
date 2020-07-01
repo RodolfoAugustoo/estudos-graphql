@@ -2,19 +2,22 @@ const Usuarios = [{
   id: 1,
   nome: "rodolfo",
   email: 'r.@dolfo.vom',
-  perfil_id: 1
+  perfil_id: 1,
+  status: 'ATIVO'
 },
   {
     id: 2,
     nome: 'josé',
     email: 'jo@se.com',
-    perfil_id: 2
+    perfil_id: 2,
+    status: 'INATIVO'
   },
   {
     id: 3,
     nome: 'michele',
     email: 'mi@chele.com',
-    perfil_id: 1
+    perfil_id: 1,
+    status: 'BLOQUEADO'
   }]
 
 const Perfis = [{
@@ -23,7 +26,7 @@ const Perfis = [{
 },
   {
     id: 2,
-    nome: 'Administrado'
+    nome: 'Administrador'
   }]
 
 module.exports = {Usuarios, Perfis}
