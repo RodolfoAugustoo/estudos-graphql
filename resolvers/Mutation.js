@@ -22,6 +22,6 @@ module.exports = {
     if (index < 0) return null
 
     const excluidos = Usuarios.splice(index, 1)
-    return excluidos
+    return excluidos ? excluidos[0] : null
   }
 }
